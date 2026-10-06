@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ashtanga · 阿斯汤加练习册</title>
+<meta name="theme-color" content="#FBF5EA">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --paper:#FBF5EA; --card:#FFFDF6; --ink:#33322C; --ink2:#6E6A5C; --muted:#A8A292;
+  --sage:#7C8B6F; --sageD:#5A6A4E; --clay:#C4744A; --sky:#8FB5B0; --gold:#D9A441;
+  --hair:rgba(51,50,44,.15);
+}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:-apple-system,'PingFang SC','HarmonyOS Sans SC','Noto Sans SC','Microsoft YaHei',sans-serif;line-height:1.75}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:98;opacity:.45;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='130'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='130' height='130' filter='url(%23n)'/%3E%3C/svg%3E")}
+.serif{font-family:Georgia,'Noto Serif SC','Songti SC','SimSun',serif}
+h1,h2,h3,.sans{letter-spacing:.02em}
+
+/* ---------- hero ---------- */
+#hero{position:relative;min-height:64vh;display:grid;place-items:center;text-align:center;overflow:hidden;
+  background:url('img/hero.jpg') center 30%/cover no-repeat var(--sageD)}
+#hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,32,24,.18),rgba(30,32,24,.02) 45%,var(--paper) 98%)}
+.heroIn{position:relative;z-index:2;padding:calc(env(safe-area-inset-top) + 6vh) 22px 40px;color:#FFF9EC}
+.heroIn h1{font-family:Georgia,'Noto Serif SC',serif;font-size:clamp(2.1rem,7vw,3.2rem);font-weight:600;letter-spacing:.12em;text-shadow:0 2px 24px rgba(30,32,24,.45)}
+.heroIn .dev{font-style:italic;font-size:.95rem;letter-spacing:.2em;opacity:.92;margin-top:.4rem}
+.heroIn .zh{font-size:1.05rem;letter-spacing:.5em;margin-top:1.1rem;text-shadow:0 1px 12px rgba(30,32,24,.5)}
+.heroIn .one{margin-top:1.3rem;font-size:.86rem;line-height:2;opacity:.95;letter-spacing:.12em}
+/* 呼吸球 */
+#breath{margin:2.2rem auto 0;width:118px;height:118px;border-radius:50%;display:grid;place-items:center;cursor:pointer;
+  background:radial-gradient(circle at 40% 32%, rgba(255,249,236,.5), rgba(255,249,236,.12) 65%, rgba(255,249,236,.06));
+  border:1.5px solid rgba(255,249,236,.55);box-shadow:0 0 44px rgba(255,233,190,.35),inset 0 0 30px rgba(255,249,236,.15);
+  transition:transform 4s cubic-bezier(.45,0,.55,1);user-select:none}
+#breath span{font-size:.82rem;letter-spacing:.3em;color:#FFF9EC;text-shadow:0 1px 8px rgba(30,32,24,.4)}
+.breathHint{margin-top:.9rem;font-size:.75rem;letter-spacing:.25em;color:rgba(255,249,236,.85)}
+
+/* ---------- 导航 ---------- */
+#nav{position:sticky;top:0;z-index:50;background:rgba(251,245,234,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair);
+  display:flex;gap:4px;overflow-x:auto;padding:10px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#nav::-webkit-scrollbar{display:none}
+#nav a{flex-shrink:0;text-decoration:none;color:var(--ink2);font-size:.82rem;letter-spacing:.14em;padding:6px 14px;border-radius:999px;border:1px solid transparent}
+#nav a.on{color:var(--sageD);border-color:var(--sage);background:rgba(124,139,111,.1);font-weight:600}
+
+main{max-width:760px;margin:0 auto;padding:0 20px}
+.chap{margin:64px 0 8px;display:flex;align-items:baseline;gap:12px}
+.chap .no{font-family:Georgia,serif;font-style:italic;font-size:2rem;color:var(--clay)}
+.chap h2{font-family:Georgia,'Noto Serif SC',serif;font-size:1.35rem;letter-spacing:.1em}
+.chap .en{font-size:.8rem;color:var(--muted);letter-spacing:.18em;font-style:italic}
+.chapIntro{color:var(--ink2);font-size:.9rem;margin:6px 0 18px}
+.chapPic{border-radius:12px;overflow:hidden;margin:10px 0 20px;box-shadow:0 10px 30px rgba(51,50,44,.14);border:1px solid var(--hair)}
+.chapPic img{width:100%;display:block;aspect-ratio:16/7;object-fit:cover}
+
+/* ---------- 体式卡 ---------- */
+.pose{display:flex;gap:14px;padding:18px 4px;border-top:1px solid var(--hair);align-items:flex-start}
+.pose:last-child{border-bottom:1px solid var(--hair)}
+.pose .num{font-family:Georgia,serif;font-style:italic;font-size:1.15rem;color:var(--clay);min-width:34px;padding-top:2px}
+.pose .body{flex:1}
+.pose h3{font-size:1.02rem;font-weight:700;letter-spacing:.04em}
+.pose h3 .sa{font-family:Georgia,serif;font-style:italic;font-weight:500;font-size:.85rem;color:var(--ink2);margin-left:6px}
+.pose p{font-size:.86rem;color:var(--ink2);margin-top:4px}
+.pose .bre{font-size:.75rem;color:var(--sageD);letter-spacing:.12em;margin-top:5px}
+.pose .bre b{color:var(--clay)}
+.pose .ck{margin-top:8px;display:flex;align-items:center;gap:7px;cursor:pointer;user-select:none}
+.pose .ck i{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--muted);display:grid;place-items:center;font-size:11px;color:transparent;font-style:normal;transition:all .2s}
+.pose.done .ck i{background:var(--sage);border-color:var(--sage);color:#FFF9EC}
+.pose.done h3{text-decoration:line-through;text-decoration-color:rgba(124,139,111,.5)}
+.pose .ck em{font-size:.75rem;color:var(--muted);font-style:normal;letter-spacing:.1em}
+.bar{height:3px;background:var(--cream);border-radius:2px;margin:14px 0 4px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--sage),var(--clay));width:0;transition:width .4s}
+.doneLine{font-size:.75rem;color:var(--muted);letter-spacing:.12em;margin-bottom:6px}
+
+/* ---------- 跟练 ---------- */
+#follow{position:fixed;inset:0;z-index:96;background:linear-gradient(180deg,#2E332A,#1D211A);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;color:#FFF9EC}
+#follow.on{display:flex}
+#fSeq{font-size:.78rem;letter-spacing:.3em;color:rgba(255,249,236,.65);margin-bottom:10px}
+#fNo{font-family:Georgia,serif;font-style:italic;font-size:1rem;color:var(--gold)}
+#fName{font-family:Georgia,'Noto Serif SC',serif;font-size:1.7rem;margin:.5rem 0 .2rem;letter-spacing:.08em}
+#fSa{font-style:italic;font-family:Georgia,serif;color:rgba(255,249,236,.7);font-size:.9rem}
+#fTip{font-size:.88rem;color:rgba(255,249,236,.85);margin-top:1rem;max-width:300px;line-height:1.9}
+#fBall{width:140px;height:140px;border-radius:50%;margin:2rem 0;display:grid;place-items:center;
+  background:radial-gradient(circle at 42% 34%, rgba(255,249,236,.34), rgba(255,249,236,.08) 68%);
+  border:1.5px solid rgba(255,249,236,.5);transition:transform 4s cubic-bezier(.45,0,.55,1)}
+#fBall span{font-size:2rem;font-weight:300;font-family:Georgia,serif}
+#fSkip{margin-top:1.4rem;background:none;border:1px solid rgba(255,249,236,.35);color:rgba(255,249,236,.85);border-radius:999px;padding:9px 26px;font-size:.82rem;letter-spacing:.2em;cursor:pointer}
+#fEnd{margin-top:1rem;background:var(--gold);border:none;color:#33322C;border-radius:999px;padding:10px 30px;font-size:.85rem;letter-spacing:.2em;cursor:pointer;font-weight:600}
+
+/* ---------- 慢生活/三角原则 ---------- */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.pill{background:var(--card);border:1px solid var(--hair);border-radius:12px;padding:14px 10px;text-align:center}
+.pill b{display:block;font-family:Georgia,'Noto Serif SC',serif;font-size:1.02rem;color:var(--sageD);letter-spacing:.06em}
+.pill i{display:block;font-style:italic;font-family:Georgia,serif;font-size:.72rem;color:var(--muted);margin:2px 0 6px}
+.pill p{font-size:.75rem;color:var(--ink2);line-height:1.7}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:14px 0 6px}
+.week i{font-style:normal;text-align:center;font-size:.72rem;padding:9px 0;border-radius:9px;background:var(--cream);color:var(--ink2);letter-spacing:.05em}
+.week i.y{background:var(--sage);color:#FFF9EC;font-weight:600}
+.week i.r{background:rgba(196,116,74,.14);color:var(--clayD)}
+.note{background:var(--card);border:1px solid var(--hair);border-radius:12px;padding:14px 16px;font-size:.8rem;color:var(--ink2);margin-top:10px}
+footer{margin:70px 0 40px;text-align:center;color:var(--muted);font-size:.78rem;letter-spacing:.2em;line-height:2.2}
+footer .sa{font-family:Georgia,serif;font-style:italic;font-size:.9rem;color:var(--sageD)}
+#toast{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 26px);left:50%;transform:translate(-50%,20px);z-index:97;background:#33322C;color:#FFF9EC;font-size:.85rem;letter-spacing:.1em;padding:11px 26px;border-radius:999px;opacity:0;transition:all .35s;pointer-events:none}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:420px){.pillars{grid-template-columns:1fr}.pill{display:flex;gap:10px;text-align:left;align-items:center}.pill div{flex:1}}
+</style>
+</head>
+<body>
+
+<div id="hero">
+  <div class="heroIn">
+    <h1>ASHTANGA</h1>
+    <div class="dev">aṣṭa-aṅga · 八支瑜伽</div>
+    <div class="zh">阿 斯 汤 加 练 习 册</div>
+    <div class="one">呼吸是线，体式是珠。<br>把一串体式，穿成一天的开场。</div>
+    <div id="breath"><span>吸 —— 呼</span></div>
+    <div class="breathHint">点住它 · 跟着球做 3 轮喉呼吸</div>
+  </div>
+</div>
+
+<nav id="nav">
+  <a href="#c1">拜日式 A</a><a href="#c2">拜日式 B</a><a href="#c3">站姿</a><a href="#c4">坐姿</a><a href="#c5">结束</a><a href="#c6">节奏</a>
+</nav>
+
+<main>
+  <!-- 拜日式 A -->
+  <section id="c1">
+    <div class="chap"><span class="no">Ⅰ</span><h2>拜日式 A</h2><span class="en">Sūrya Namaskāra A · 9 vinyāsa</span></div>
+    <p class="chapIntro">每遍 9 个计数，做 5 遍热身。吸气展臂，呼气前屈——像给身体念一遍开场白。</p>
+    <div class="chapPic"><img src="img/surA.jpg" alt="拜日式 A" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="doneLine" data-seq="A">今天还没开始 ——</div><div class="bar"><i></i></div>
+    <div class="poses" data-seq="A">
+      <div class="pose" data-tip="脚跟并拢，大腿收紧，肩膀沉下来。呼吸的时候，站得像山一样不动声色。"><div class="num">1</div><div class="body"><h3>山式 <span class="sa">Samasthitiḥ</span></h3><p>双脚并拢站直，脊柱拉长，目视鼻尖。</p><div class="bre">呼气 · <b>ekam 起始位</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="吸气从髋部对折脊柱向上延展；呼气沉胸口。"><div class="num">2</div><div class="body"><h3>展臂式 <span class="sa">Urdhva Vṛkṣāsana</span></h3><p>吸气，双臂上举，掌心相对，眼看拇指。</p><div class="bre">吸气 · <b>dve</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="膝盖可以微屈，让肚子先贴大腿。"><div class="num">3</div><div class="body"><h3>站立前屈 <span class="sa">Uttānāsana</span></h3><p>呼气，从髋部对折，双手扶地或抱小腿。</p><div class="bre">呼气 · <b>trīṇi</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="背是平的，像把胸口往前递出去。"><div class="num">4</div><div class="body"><h3>半前屈 <span class="sa">Ārdha Uttānāsana</span></h3><p>吸气，抬头延展脊柱，指尖点地或扶小腿。</p><div class="bre">吸气 · <b>catvāri</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="手肘夹住肋骨，像做一半的俯卧撑。撑不住就膝盖落地，没人扣分。"><div class="num">5</div><div class="body"><h3>四柱式 <span class="sa">Caturaṅga Daṇḍāsana</span></h3><p>呼气，后跳或迈步到平板，屈肘下降。</p><div class="bre">呼气 · <b>pañca</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="胸口往前推，大腿离地。耻骨贴地就够。"><div class="num">6</div><div class="body"><h3>上犬式 <span class="sa">Ūrdhva Mukha Śvānāsana</span></h3><p>吸气，脚背压地，胸口前推，手臂伸直。</p><div class="bre">吸气 · <b>ṣaṭ</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="经典的三角形。坐骨往天上顶，脚跟往下踩。"><div class="num">7</div><div class="body"><h3>下犬式 <span class="sa">Adho Mukha Śvānāsana</span></h3><p>呼气，臀部向后向上，保持 5 个呼吸。</p><div class="bre">呼气 · <b>sapta · 保持 5 呼吸</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="吸气回到半前屈，背展平。"><div class="num">8</div><div class="body"><h3>半前屈 <span class="sa">Ārdha Uttānāsana</span></h3><p>吸气，走跳回双手之间，抬头延展。</p><div class="bre">吸气 · <b>aṣṭau</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="呼气回到山式，站直，呼吸一次，再来一遍。"><div class="num">9</div><div class="body"><h3>山式 <span class="sa">Samasthitiḥ</span></h3><p>呼气，前屈；吸气起身合掌，回到山式。</p><div class="bre">呼/吸 · <b>nava · 回到起始</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+    </div>
+    <button class="fstart sans" data-seq="A" data-tips="脚跟并拢站直|吸气双臂上举|呼气前屈折叠|吸气抬头延展|呼气四柱|吸气上犬|呼气下犬·5呼吸|吸气半前屈|呼气回山式">▶ 跟练这一序列</button>
+  </section>
+
+  <!-- 拜日式 B -->
+  <section id="c2">
+    <div class="chap"><span class="no">Ⅱ</span><h2>拜日式 B</h2><span class="en">Sūrya Namaskāra B · 17 vinyāsa</span></div>
+    <p class="chapIntro">在 A 的骨架上加入幻椅与战士一。腿部开始说话，心率也跟着上来。做 5 遍。</p>
+    <div class="chapPic"><img src="img/surB.jpg" alt="拜日式 B" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="bar"><i></i></div>
+  <div class="doneLine" data-seq="2">今天还没开始 ——</div><div class="bar"><i></i></div>
+  <div class="poses" data-seq="B">
+      <div class="pose" data-tip="重心往后坐，想象坐在一张看不见的椅子上。"><div class="num">1</div><div class="body"><h3>幻椅式 <span class="sa">Utkatāsana</span></h3><p>吸气，屈膝下沉，双臂上举，眼看拇指。</p><div class="bre">吸气 · <b>ekam</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="和拜日 A 一样，膝盖可落地。"><div class="num">2</div><div class="body"><h3>前屈 → 四柱 <span class="sa">Uttānāsana → Caturaṅga</span></h3><p>呼气前屈；吸气半前屈；呼气四柱。</p><div class="bre">呼-吸-呼 · <b>dve~catvāri</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="右腿在后时右脚跟内扣 45°。髋摆正，比下犬累得多。"><div class="num">3</div><div class="body"><h3>战士一（右） <span class="sa">Vīrabhadrāsana I</span></h3><p>吸气，右腿后撤上举，前腿屈膝，保持 5 呼吸。</p><div class="bre">吸气 · <b>pañca · 5 呼吸</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="战士一换左腿，同 5 呼吸。"><div class="num">4</div><div class="body"><h3>战士一（左） <span class="sa">Vīrabhadrāsana I</span></h3><p>呼气四柱过渡；吸气换侧，左腿后撤上举。</p><div class="bre">呼气→吸气 · <b>ṣaṭ~sapta · 5 呼吸</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="呼气下犬，这是 B 式里最长的一次停留。"><div class="num">5</div><div class="body"><h3>下犬式 <span class="sa">Adho Mukha Śvānāsana</span></h3><p>呼气后撤，双脚踩地，保持 5 个呼吸。</p><div class="bre">呼气 · <b>aṣṭau · 5 呼吸</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="呼气回到起始位。五遍之后开始站姿序列。"><div class="num">6</div><div class="body"><h3>幻椅 → 山式 <span class="sa">Utkatāsana → Samasthitiḥ</span></h3><p>吸气走跳回前屈，呼气沉；吸气起身回山式。</p><div class="bre">吸-呼-吸 · <b>nava~ekādaśa</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+    </div>
+    <button class="fstart sans" data-seq="B" data-tips="吸气幻椅|呼气前屈四柱|吸气战士一右·5呼吸|换边战士一左|呼气下犬·5呼吸|吸气回幻椅再山式">▶ 跟练这一序列</button>
+  </section>
+
+  <!-- 站姿 -->
+  <section id="c3">
+    <div class="chap"><span class="no">Ⅲ</span><h2>站姿序列</h2><span class="en">Standing Postures · 每侧 5 呼吸</span></div>
+    <p class="chapIntro">站姿是根基课。脚压得越实，身体越敢打开。</p>
+    <div class="chapPic"><img src="img/standing.jpg" alt="站姿" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="bar"><i></i></div>
+  <div class="doneLine" data-seq="3">今天还没开始 ——</div><div class="bar"><i></i></div>
+  <div class="poses" data-seq="S">
+      <div class="pose" data-tip="膝盖微屈保护腘绳肌；呼气向下，吸气延展。"><div class="num">1</div><div class="body"><h3>站立腿上举 <span class="sa">Padāṅguṣṭhāsana</span></h3><p>单腿站立，手抓大脚趾前屈；再侧向展开。</p><div class="bre">保持 <b>5 呼吸 × 3 变体</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="下面的手抓大脚趾，转胸口向上看天花板。"><div class="num">2</div><div class="body"><h3>三角式 <span class="sa">Utthita Trikoṇāsana</span></h3><p>双脚三倍肩宽，前脚外转，侧向下探。</p><div class="bre">保持 <b>5 呼吸 · 每侧</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="前膝盖对准第二脚趾，别让它内扣。"><div class="num">3</div><div class="body"><h3>侧角式 <span class="sa">Utthita Pārśvakoṇāsana</span></h3><p>前膝屈 90°，腋下压膝盖，后手过头延展。</p><div class="bre">保持 <b>5 呼吸 · 每侧</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="A/B/C/D 四个手位，头慢慢放松下去。"><div class="num">4</div><div class="body"><h3>双角式 <span class="sa">Prasārita Padottānāsana</span></h3><p>双脚远宽于肩，四个手位依次前屈。</p><div class="bre">各 <b>5 呼吸</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="后脚跟踩实，髋摆正，从侧腰折叠。"><div class="num">5</div><div class="body"><h3>加强侧伸展 <span class="sa">Pārśvottānāsana</span></h3><p>双手背后合掌（或抱肘），前屈贴前腿。</p><div class="bre">保持 <b>5 呼吸 · 每侧</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="站不稳就看一个固定点。晃，也是练习的一部分。"><div class="num">6</div><div class="body"><h3>站立手抓脚 <span class="sa">Utthita Hasta Pādāṅguṣṭhāsana</span></h3><p>手抓大脚趾把腿抬起来，向前、向侧展开。</p><div class="bre">各 <b>5 呼吸 · 每侧</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+    </div>
+    <button class="fstart sans" data-seq="S" data-tips="站立腿上举·每侧5呼吸|三角式|侧角式|双角式ABCD|加强侧伸展|站立手抓脚">▶ 跟练这一序列</button>
+  </section>
+
+  <!-- 坐姿 -->
+  <section id="c4">
+    <div class="chap"><span class="no">Ⅳ</span><h2>坐姿序列</h2><span class="en">Seated Postures · 从前屈开始</span></div>
+    <p class="chapIntro">坐姿是初级序列的主体。前屈收敛，后弯打开，扭转 wring 出疲惫。</p>
+    <div class="chapPic"><img src="img/seated.jpg" alt="坐姿" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="bar"><i></i></div>
+  <div class="doneLine" data-seq="4">今天还没开始 ——</div><div class="bar"><i></i></div>
+  <div class="poses" data-seq="T">
+      <div class="pose" data-tip="坐骨压实，吸气延展，呼气沉胸口。"><div class="num">1</div><div class="body"><h3>双腿背伸展 <span class="sa">Paścimottānāsana</span></h3><p>双腿伸直，抓住脚，前屈贴腿，5 呼吸×3 次。</p><div class="bre">保持 <b>5 呼吸</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="肩膀在手腕正上方，身体像一张绷紧的桌子。"><div class="num">2</div><div class="body"><h3>后仰支架 <span class="sa">Pūrvottānāsana</span></h3><p>手在臀后方，脚跟压地，身体抬成一条线。</p><div class="bre">保持 <b>5 呼吸</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="半莲花别硬掰；膝盖不舒服就盘不上，先盘一半。"><div class="num">3</div><div class="body"><h3>半莲花前屈 <span class="sa">Ardha Baddha Padma Paścimottānāsana</span></h3><p>一腿半盘，同侧手背后抓脚趾，前屈。</p><div class="bre">保持 <b>5 呼吸 · 每侧</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="额头先找膝盖再找小腿，够不到就放一本砖。"><div class="num">4</div><div class="body"><h3>头碰膝 <span class="sa">Jānu Śīrṣāsana A</span></h3><p>一腿伸直一脚内收，前屈抱脚，扭转胸口。</p><div class="bre">保持 <b>5 呼吸 · 每侧</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="绕臂扣手是重点，前屈是奖励。"><div class="num">5</div><div class="body"><h3>圣哲玛里奇 A <span class="sa">Marīcyāsana A</span></h3><p>屈膝抱小腿，双手背后相扣前屈。</p><div class="bre">保持 <b>5 呼吸 · 每侧</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="扭转时先转胸口，再转头。"><div class="num">6</div><div class="body"><h3>圣哲玛里奇 C <span class="sa">Marīcyāsana C</span></h3><p>屈膝脚跨过对侧腿，反向扭转，扣手加深。</p><div class="bre">保持 <b>5 呼吸 · 每侧</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="胸口朝天花板，腿像船的龙骨。抖了就抖，坚持 5 呼吸。"><div class="num">7</div><div class="body"><h3>船式 <span class="sa">Nāvāsana</span></h3><p>双腿上举 45°，双臂平行前伸，核心收紧。</p><div class="bre">保持 <b>5 呼吸 × 3 次</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+    </div>
+    <button class="fstart sans" data-seq="T" data-tips="双腿背伸展|后仰支架|半莲花前屈|头碰膝|玛里奇 A|玛里奇 C|船式×3">▶ 跟练这一序列</button>
+  </section>
+
+  <!-- 结束序列 -->
+  <section id="c5">
+    <div class="chap"><span class="no">Ⅴ</span><h2>结束序列</h2><span class="en">Finishing Postures · 倒转与安静</span></div>
+    <p class="chapIntro">练习的后半段是给神经系统做一次复位。倒转、卷曲、然后彻底安静。</p>
+    <div class="chapPic"><img src="img/finishing.jpg" alt="结束序列" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="bar"><i></i></div>
+  <div class="doneLine" data-seq="5">今天还没开始 ——</div><div class="bar"><i></i></div>
+  <div class="poses" data-seq="F">
+      <div class="pose" data-tip="推高之前先热好肩背；从桥式过渡两次再直腿。"><div class="num">1</div><div class="body"><h3>轮式 <span class="sa">Ūrdhva Dhanurāsana</span></h3><p>双手推地抬起身体成拱形，做 3 次，各 5 呼吸。</p><div class="bre">保持 <b>5 呼吸 × 3</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="肩倒立的重量放在肩上，不是脖子上。"><div class="num">2</div><div class="body"><h3>肩倒立 <span class="sa">Sarvāṅgāsana</span></h3><p>双腿上举垂直地面，双手扶背，收下颌。</p><div class="bre">保持 <b>10~25 呼吸</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="从肩倒立慢慢卷下来，脚超过头顶。"><div class="num">3</div><div class="body"><h3>犁式 <span class="sa">Halāsana</span></h3><p>双脚落到头顶后方地面，腿伸直，收下颌。</p><div class="bre">保持 <b>10 呼吸</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="最后的体式。膝盖压耳，世界很安静。"><div class="num">4</div><div class="body"><h3>耳压膝 <span class="sa">Karṇapīdāsana</span></h3><p>犁式基础上屈膝，膝盖轻轻压向耳朵。</p><div class="bre">保持 <b>5~10 呼吸</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+      <div class="pose" data-tip="摊开手脚，什么都不做。这是练习里最难也最重要的一个。"><div class="num">5</div><div class="body"><h3>挺尸式 <span class="sa">Śavāsana</span></h3><p>平躺，手心朝上，跟着呼吸，1~3 分钟。</p><div class="bre">放松 <b>至少 1 分钟</b></div><label class="ck"><i>✓</i><em>记一个</em></label></div></div>
+    </div>
+    <button class="fstart sans" data-seq="F" data-tips="轮式×3|肩倒立|犁式|耳压膝|挺尸式·1~3分钟">▶ 跟练这一序列</button>
+  </section>
+
+  <!-- 节奏 -->
+  <section id="c6">
+    <div class="chap"><span class="no">Ⅵ</span><h2>练习节奏</h2><span class="en">Cadence · 一周三练也可以开始</span></div>
+    <p class="chapIntro">传统是一周六练、满月新月休息。但从一周三次开始，坚持下来，就是你的节奏。</p>
+    <div class="week">
+      <i class="y">一</i><i class="y">二</i><i class="r">三</i><i class="y">四</i><i class="y">五</i><i class="r">六</i><i class="r">日</i>
+    </div>
+    <p class="chapIntro" style="margin-top:4px">示例：周一二练、周三歇；周四五练、周末自由。绿色的日子交给垫子，橙色的日子交给生活。</p>
+    <div class="pillars">
+      <div class="pill"><div><b>呼吸</b><i>Ujjāyī</i><p>喉部轻收，让呼吸带一点海浪声。用耳朵监控自己的节奏。</p></div></div>
+      <div class="pill"><div><b>锁印</b><i>Bandha</i><p>会阴轻提（Mūla），下腹内收（Uḍḍīyāna），核心从里面亮起来。</p></div></div>
+      <div class="pill"><div><b>凝视</b><i>Dṛṣṭi</i><p>鼻尖、拇指、肚脐……目光落在哪里，心就落在哪里。</p></div></div>
+    </div>
+    <div class="note">🧘 传统建议空腹清晨练习；生理期和孕期请调整体式或休息。身体持续的疼痛不是「突破」，请停下来并咨询专业老师。本页为文化介绍与自我练习参考，不构成医疗建议。</div>
+    <div class="chapPic" style="margin-top:18px"><img src="img/breath.jpg" alt="呼吸与静坐" loading="lazy" onerror="this.style.display='none'"></div>
+  </section>
+
+  <footer>
+    <div class="sa">yogāś citta-vṛtti-nirodhaḥ</div>
+    瑜伽，是心念波动的止息<br>
+    ASHTANGA · 练习册 · 记录你的每一次呼吸
+  </footer>
+</main>
+
+<!-- 跟练 -->
+<div id="follow">
+  <div id="fSeq">拜日式 A</div>
+  <div id="fNo">1 / 9</div>
+  <div id="fName" class="serif">山式</div>
+  <div id="fSa">Samasthitiḥ</div>
+  <div id="fTip">脚跟并拢站直</div>
+  <div id="fBall"><span id="fCount">5</span></div>
+  <button id="fSkip">跳过这个 →</button>
+  <button id="fEnd">结束跟练</button>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),2400)}
+
+/* ============ 首页呼吸球 ============ */
+(()=>{let n=0;
+  $("#breath").addEventListener("click",()=>{
+    const b=$("#breath"),sp=b.querySelector("span");
+    if(n){clearInterval(n);n=0;sp.textContent="吸 —— 呼";b.style.transform="scale(1)";return}
+    let up=true;
+    b.style.transform="scale(1.22)";
+    sp.textContent="吸气…";up=false;
+    let ph=0;
+    n=setInterval(()=>{ph++;
+      if(ph%5===1){up=!up;
+        b.style.transform=up?"scale(1)":"scale(1.22)";
+        sp.textContent=up?"呼 —— 气":"吸 —— 气"}
+    },4000);
+    setTimeout(()=>{if(n){clearInterval(n);n=0;sp.textContent="吸 —— 呼";b.style.transform="scale(1)";toast("三轮呼吸完成 —— 从这里开始今天")}},24000);
+  });
+})();
+
+/* ============ 体式勾选（localStorage 分序列） ============ */
+let DONE={};try{DONE=JSON.parse(localStorage.getItem("ast_done")||"{}")}catch(e){}
+function paint(seq){
+  const box=document.querySelector(`.poses[data-seq="${seq}"]`);
+  const items=[...box.querySelectorAll(".pose")];
+  let dn=0;
+  items.forEach((p,i)=>{
+    const ok=(DONE[seq]||[]).includes(i);
+    p.classList.toggle("done",ok);
+    p.querySelector(".ck em").textContent=ok?"记下了":"记一个";
+    if(ok)dn++;
+  });
+  const wrap=box.closest("section");
+  const _b=wrap.querySelector(".bar i");if(_b)_b.style.width=(dn/items.length*100)+"%";
+  wrap.querySelector(".doneLine").textContent=dn?`已记下 ${dn} / ${items.length} 个体式`:"今天还没开始 ——";
+}
+function bindSeq(seq){
+  const box=document.querySelector(`.poses[data-seq="${seq}"]`);
+  box.querySelectorAll(".pose").forEach((p,i)=>{
+    p.querySelector(".ck").addEventListener("click",()=>{
+      DONE[seq]=DONE[seq]||[];
+      const at=DONE[seq].indexOf(i);
+      if(at<0){DONE[seq].push(i);toast("记下了 —— 这个体式归你了 ✓")}
+      else{DONE[seq].splice(at,1)}
+      localStorage.setItem("ast_done",JSON.stringify(DONE));
+      paint(seq);
+    });
+  });
+  paint(seq);
+}
+["A","B","S","T","F"].forEach(bindSeq);
+
+/* ============ 跟练模式 ============ */
+const SEQNAME={A:"拜日式 A",B:"拜日式 B",S:"站姿序列",T:"坐姿序列",F:"结束序列"};
+let F={seq:null,list:[],i:0,timer:null,phase:0};
+function ball(cb){ // 5 呼吸：吸4s球放大 呼4s缩小 循环5次
+  const b=$("#fBall"),c=$("#fCount");let k=0,up=true;
+  b.style.transform="scale(1.25)";c.textContent="吸";
+  clearInterval(F.timer);
+  F.timer=setInterval(()=>{k++;
+    const n=5-Math.ceil(k/2);
+    c.textContent=up?"吸":"呼";
+    if(k%2===0){up=!up;b.style.transform=up?"scale(1)":"scale(1.25)";if(up)c.textContent=Math.max(1,n)}
+    if(k>=10){clearInterval(F.timer);b.style.transform="scale(1)";c.textContent="✓";setTimeout(cb,500)}
+  },4000);
+}
+function showF(){
+  const p=F.list[F.i];
+  $("#fSeq").textContent=SEQNAME[F.seq];
+  $("#fNo").textContent=(F.i+1)+" / "+F.list.length;
+  $("#fName").textContent=p.querySelector("h3").childNodes[0].textContent.trim();
+  $("#fSa").textContent=(p.querySelector(".sa")||{}).textContent||"";
+  $("#fTip").textContent=p.dataset.tip;
+  ball(()=>{F.i++;F.i<F.list.length?showF():endFollow(true)});
+}
+function endFollow(done){
+  clearInterval(F.timer);
+  $("#follow").classList.remove("on");
+  if(done){
+    const mark=JSON.parse(localStorage.getItem("ast_follow")||"{}");
+    mark[F.seq]=(mark[F.seq]||0)+1;
+    localStorage.setItem("ast_follow",JSON.stringify(mark));
+    toast("跟练完成 —— "+SEQNAME[F.seq]+" 记一笔 🧘");
+  }
+}
+$$(".fstart").forEach(b=>b.addEventListener("click",()=>{
+  F.seq=b.dataset.seq;F.i=0;
+  F.list=[...document.querySelector(`.poses[data-seq="${F.seq}"]`).querySelectorAll(".pose")];
+  $("#follow").classList.add("on");showF();
+}));
+$("#fSkip").addEventListener("click",()=>{clearInterval(F.timer);F.i++;F.i<F.list.length?showF():endFollow(true)});
+$("#fEnd").addEventListener("click",()=>endFollow(false));
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#follow").classList.contains("on"))endFollow(false)});
+
+/* ============ 导航高亮 ============ */
+const ids=["c1","c2","c3","c4","c5","c6"];
+addEventListener("scroll",()=>{
+  let cur="c1";ids.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<110)cur=id});
+  $$("#nav a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur));
+},{passive:true});
+</script>
+</body>
+</html>
